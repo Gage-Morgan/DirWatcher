@@ -1,3 +1,4 @@
+use color_print::cprint;
 use notify::{Config, Event, RecommendedWatcher, RecursiveMode, Result, Watcher};
 use std::path::Path;
 use std::sync::mpsc::channel;
@@ -17,7 +18,7 @@ fn main() -> Result<()> {
     // Start watching the firectory recursivley
     watcher.watch(dir_to_watch, RecursiveMode::Recursive)?;
 
-    println!("Watching directory: {:?}", dir_to_watch);
+    cprint!("Watching directory: <bright-blue>{:?}</>\n", dir_to_watch);
 
     loop {
         match rx.recv() {
@@ -31,15 +32,15 @@ fn handle_event(event: Event) {
     for path in event.paths {
         match event.kind {
             notify::event::EventKind::Create(_) => {
-                println!("File created: {:?}", path);
+                cprint!("File created: <bright-green>{:?}</>\n", path);
             }
 
             notify::event::EventKind::Modify(_) => {
-                println!("File modified: {:?}", path);
+                cprint!("File modified: <bright-yellow>{:?}</>\n", path);
             }
 
             notify::event::EventKind::Remove(_) => {
-                println!("File deleted: {:?}", path);
+                cprint!("File deleted: <bright-red>{:?}</>\n", path);
             }
 
             _ => continue,

@@ -5,3 +5,4 @@ edition = "2021"
 
 [dependencies]
 notify = "6.1"
+color-print = "0.3.6"
