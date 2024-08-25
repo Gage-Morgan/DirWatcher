@@ -4,6 +4,7 @@ use std::path::Path;
 use std::sync::mpsc::channel;
 
 fn main() -> Result<()> {
+    // Collect user input into a string vector
     let args: Vec<String> = std::env::args().collect();
 
     // create a channel to recieve the events
@@ -15,7 +16,7 @@ fn main() -> Result<()> {
     // Define the directory to watch
     let dir_to_watch = Path::new(&args[1]);
 
-    // Start watching the firectory recursivley
+    // Start watching the Directory recursivley
     watcher.watch(dir_to_watch, RecursiveMode::Recursive)?;
 
     cprint!("Watching directory: <bright-blue>{:?}</>\n", dir_to_watch);
